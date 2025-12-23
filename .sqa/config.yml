@@ -1,0 +1,68 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/ARGOeu/argo-alert:
+      branch: master
+      repo: https://github.com/ARGOeu/argo-alert
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/ARGOeu/argo-alert git:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-orange-avocet.sh
+        container: qc.acc_sleepy-ivory-fish
+  QC.Doc:
+    repos:
+      github.com/ARGOeu/argo-alert find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-cobalt-rattlesnake.sh
+        container: qc.doc_scummy-heliotrope-snail
+      github.com/ARGOeu/argo-alert git:
+        commands:
+        - /usr/bin/env sh .sqa/script.craggy-magenta-tang.sh
+        container: qc.doc_frumpy-black-moth
+      github.com/ARGOeu/argo-alert markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.messy-eggplant-monster.sh
+        container: qc.doc_wheezy-red-harrier
+  QC.Lic:
+    repos:
+      github.com/ARGOeu/argo-alert licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-fuchsia-macaque.sh
+        container: qc.lic_muggy-sepia-woodpecker
+  QC.Sec:
+    repos:
+      github.com/ARGOeu/argo-alert bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.skinny-ochre-dane.sh
+        container: qc.sec_lovely-buff-heron
+  QC.Sty:
+    repos:
+      github.com/ARGOeu/argo-alert flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-seashell-civet.sh
+        container: qc.sty_scanty-mustard-boar
+      github.com/ARGOeu/argo-alert jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-jade-spitz.sh
+        container: qc.sty_muzzy-azure-forest
+  QC.Uni:
+    repos:
+      github.com/ARGOeu/argo-alert pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.sloppy-cerise-manatee.sh
+        container: qc.uni_cloudy-ultramarine-tamarin
+  QC.Ver:
+    repos:
+      github.com/ARGOeu/argo-alert get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.whiny-amaranth-flounder.sh
+        container: qc.ver_gummy-charcoal-dolphin
+timeout: 5400
